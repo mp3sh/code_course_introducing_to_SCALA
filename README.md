@@ -318,25 +318,25 @@
 - show - принимает Point и превращает её в строку, состоящую из координат разделённых через пробел
 Для каждой строки будет вызвана функция apply, затем для всех точек будет вызвана функция average. На выход будет передан результат функции show, примененный к усреднённой точке.
 
-    case class Point(x:Double, y:Double, z:Double)
+        case class Point(x:Double, y:Double, z:Double)
 
-    object Point{
-        def apply(x:Double=0.0, y:Double=0.0 ,z:Double=0.0): Point = {
-            val res1 = new Point(x,y,z)
-            res1
-        }
+        object Point{
+            def apply(x:Double=0.0, y:Double=0.0 ,z:Double=0.0): Point = {
+                val res1 = new Point(x,y,z)
+                res1
+            }
 
-        def average(points: List[Point]): Point = {
-            if (points.isEmpty) Point(0.0,0.0,0.0)
-            else{
-                val len = points.length
-                val res_sum = points.reduce((a,b) => Point(a.x + b.x, a.y + b.y, a.z + b.z))
-                val res = List(res_sum.x, res_sum.y, res_sum.z).map(_/len)
-                Point(res(0),res(1),res(2))}
-        }
+            def average(points: List[Point]): Point = {
+                if (points.isEmpty) Point(0.0,0.0,0.0)
+                else{
+                    val len = points.length
+                    val res_sum = points.reduce((a,b) => Point(a.x + b.x, a.y + b.y, a.z + b.z))
+                    val res = List(res_sum.x, res_sum.y, res_sum.z).map(_/len)
+                    Point(res(0),res(1),res(2))}
+            }
 
-        def show(result:Point) = {
-            val (x, y, z) = (result.x, result.y, result.z)
-            s"$x $y $z"
+            def show(result:Point) = {
+                val (x, y, z) = (result.x, result.y, result.z)
+                s"$x $y $z"
+            }
         }
-    }
