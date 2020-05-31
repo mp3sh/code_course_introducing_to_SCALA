@@ -341,3 +341,29 @@
                 s"$x $y $z"
             }
         }
+
+#### 7.4 Объекты
+Ваша задача - реализовать метод unapply у объекта FacedString﻿. Считать из потока ввода строку, сделать паттерн матчинг с ней, который определит, могла ли она быть результатом некоторого вызова apply. Если получилось выделить строку, от которой она была сконструирована, вывести эту строку на экран, если нет - вывести "Could not recognize string".
+
+    import scala.io.StdIn.readLine
+    import scala.util.matching.Regex
+
+    object FacedString {
+      def apply(input: String) = s"*_*$input*_*"
+
+      def unapply(arg: String): Option[String] = {
+        val isArg: Regex = "(\\*\\_\\*)(.*)(\\*\\_\\*)".r
+        val result = arg match {
+          case isArg(_,x,_) => Some(x)
+          case _ => None
+        }
+        println(result.getOrElse("Could not recognize string"))
+        result
+      }
+    }
+
+    object Main {
+    def main(args: Array[String]) {
+        val input = readLine()
+        FacedString.unapply(input)
+    }}
